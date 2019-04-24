@@ -7,7 +7,9 @@ import {
   number
 } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
-import { Button, Input, ChatBubble, UserImage } from '../src/components/atoms'
+import { atoms } from '../src/components'
+
+const { Button, Input, ChatBubble, UserImage } = atoms
 
 const stories = storiesOf('atoms', module)
 stories.addDecorator(withKnobs)

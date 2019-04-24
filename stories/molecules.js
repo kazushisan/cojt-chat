@@ -1,7 +1,9 @@
 import { storiesOf } from '@storybook/vue'
 import { withKnobs, text } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
-import { MessageListItem, MessageInput } from '../src/components/molecules'
+import { molecules } from '../src/components'
+
+const { MessageListItem, MessageInput } = molecules
 
 const stories = storiesOf('molecules', module)
 stories.addDecorator(withKnobs)

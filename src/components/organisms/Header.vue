@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { UserImage } from '../atoms'
+import UserImage from '../atoms/UserImage.vue'
 
 export default {
   components: {

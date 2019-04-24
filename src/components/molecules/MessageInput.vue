@@ -14,7 +14,7 @@
 
 <script>
 import VueTypes from 'vue-types'
-import { Button } from '../atoms'
+import Button from '../atoms/Button.vue'
 
 export default {
   components: {
