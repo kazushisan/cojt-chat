@@ -21,6 +21,9 @@ stories.add('MessageListItem', () => ({
     },
     text: {
       default: text('text', '直前のメッセージの内容')
+    },
+    user: {
+      default: text('user', 'ユーザ名')
     }
   },
   methods: {
@@ -30,7 +33,8 @@ stories.add('MessageListItem', () => ({
   },
   template: `
 	  <MessageListItem
-  		:image="$props.image"
+      :image="$props.image"
+      :user="$props.user"
 		  @click="onClick"
 	  >{{ $props.text }}</MessageListItem>
 	`

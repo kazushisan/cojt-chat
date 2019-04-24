@@ -52,7 +52,7 @@ export default {
     font-size: 14px;
     line-height: 1.5;
     border: none;
-    padding: 16px 20px 15px;
+    padding: 20px 20px 19px;
     align-self: stretch;
     resize: none;
     outline: none;

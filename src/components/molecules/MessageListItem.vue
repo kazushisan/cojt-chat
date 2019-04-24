@@ -7,7 +7,9 @@
         :width="48"
       )
       .message-list-item__inner
-        slot
+        div {{ $props.user }}
+        div(style="color: rgba(0,0,0,0.3);")
+          slot
 </template>
 
 <script>
@@ -19,6 +21,7 @@ export default {
     UserImage
   },
   props: {
+    user: VueTypes.string.isRequired,
     image: VueTypes.string.isRequired
   }
 }
@@ -26,7 +29,7 @@ export default {
 
 <style lang="scss" scoped>
 .message-list-item {
-  padding: 20px 8px;
+  padding: 20px;
   background-color: #fff;
   display: flex;
   align-items: center;
