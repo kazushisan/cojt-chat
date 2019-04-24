@@ -1,7 +1,13 @@
 import { storiesOf } from '@storybook/vue'
-import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
+import {
+  withKnobs,
+  select,
+  text,
+  boolean,
+  number
+} from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
-import { Button, Input, ChatBubble } from '../src/components/atoms'
+import { Button, Input, ChatBubble, UserImage } from '../src/components/atoms'
 
 const stories = storiesOf('atoms', module)
 stories.addDecorator(withKnobs)
@@ -59,5 +65,25 @@ stories.add('ChatBubble', () => ({
   },
   template: `
     <ChatBubble :fromMe="$props.fromMe">{{ $props.value }}</ChatBubble>
+  `
+}))
+
+stories.add('UserImage', () => ({
+  components: {
+    UserImage
+  },
+  props: {
+    image: {
+      default: text(
+        'image',
+        'https://avatars2.githubusercontent.com/u/29304238?s=460&v=4'
+      )
+    },
+    width: {
+      default: number('width', 120)
+    }
+  },
+  template: `
+    <UserImage :image="$props.image" />
   `
 }))
