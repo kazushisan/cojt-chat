@@ -2,6 +2,8 @@
   div
     input.input(
       :value="$props.value"
+      :placeholder="$props.placeholder"
+      :disabled="$props.disabled"
       @change="$emit('change', $event.target.value)"
     )
 </template>
@@ -15,7 +17,9 @@ export default {
     event: 'change'
   },
   props: {
-    value: VueTypes.string.isRequired
+    value: VueTypes.string.isRequired,
+    placeholder: VueTypes.string.def(''),
+    disabled: VueTypes.bool.def(false)
   }
 }
 </script>
@@ -23,19 +27,23 @@ export default {
 <style lang="scss" scoped>
 .input {
   background-color: #fff;
-  color: #333;
+  color: rgba(#000, 0.6);
   display: block;
   box-sizing: border-box;
   width: 100%;
   position: relative;
-  padding: 8px 16px;
-  border-radius: 4px;
+  padding: 12px 16px;
+  border-radius: 8px;
   border: 1px #eee solid;
   outline: none;
   margin: 0;
 
   &:focus {
-    border-color: #0070e8;
+    border-color: #1dd3b0;
+  }
+
+  &:disabled {
+    opacity: 0.4;
   }
 }
 </style>

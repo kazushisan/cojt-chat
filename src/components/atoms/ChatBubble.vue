@@ -17,16 +17,16 @@ export default {
 
 <style lang="scss" scoped>
 .bubble {
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 12px 16px;
+  border-radius: 12px;
   background-color: #eee;
-  border-top-left-radius: 0;
-  color: #333;
+  border-top-left-radius: 4px;
+  color: rgba(#000, 0.6);
 
   &--from-me {
-    background-color: #0070e8;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 0;
+    background-color: #1dd3b0;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 4px;
     color: #fff;
   }
 }

@@ -22,6 +22,9 @@ stories.add('Button', () => ({
     },
     color: {
       default: select('color', ['normal', 'primary'], 'normal')
+    },
+    disabled: {
+      default: boolean('disabled', false)
     }
   },
   methods: {
@@ -32,6 +35,7 @@ stories.add('Button', () => ({
   template: `
     <Button
       :color="$props.color"
+      :disabled="$props.disabled"
       @click="onClick"
     >{{ $props.name }}</Button>
   `
@@ -41,14 +45,26 @@ stories.add('Input', () => ({
   components: {
     Input
   },
+  props: {
+    placeholder: {
+      default: text('placeholder', '文字を入力する...')
+    },
+    disabled: {
+      default: boolean('disabled', false)
+    }
+  },
   data() {
     return {
-      value: text('value', '入力')
+      value: ''
     }
   },
   template: `
-    <Input v-model="$data.value" />
-  `
+      <Input
+        v-model="$data.value"
+        :placeholder="$props.placeholder"
+        :disabled="$props.disabled"
+      />
+    `
 }))
 
 stories.add('ChatBubble', () => ({

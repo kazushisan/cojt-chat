@@ -9,6 +9,5 @@ export default {}
 <style lang="scss" scoped>
 body {
   background-color: #fff;
-  color: #333;
 }
 </style>

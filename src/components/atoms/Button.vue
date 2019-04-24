@@ -2,6 +2,7 @@
   div
     button.button(
       :class="{ 'button--primary': $props.color === 'primary' }"
+      :disabled="$props.disabled"
       @click="$emit('click')"
     )
       slot
@@ -12,7 +13,8 @@ import VueTypes from 'vue-types'
 
 export default {
   props: {
-    color: VueTypes.oneOf(['primary', 'normal']).def('normal')
+    color: VueTypes.oneOf(['primary', 'normal']).def('normal'),
+    disabled: VueTypes.bool.def(false)
   }
 }
 </script>
@@ -20,24 +22,28 @@ export default {
 <style lang="scss" scoped>
 .button {
   background-color: #eee;
-  color: #333;
+  color: rgba(#000, 0.6);
   display: block;
   box-sizing: border-box;
   width: 100%;
   position: relative;
-  padding: 8px 16px;
-  border-radius: 4px;
+  padding: 12px 16px;
+  border-radius: 8px;
   border: 1px #eee solid;
   outline: none;
   margin: 0;
 
   &--primary {
-    background-color: #0070e8;
-    border-color: #0070e8;
+    background-color: #1dd3b0;
+    border-color: #1dd3b0;
     color: #fff;
   }
 
   &:active {
+    opacity: 0.4;
+  }
+
+  &:disabled {
     opacity: 0.4;
   }
 }
