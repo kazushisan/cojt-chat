@@ -11,8 +11,10 @@
   },
   "scripts": {
     "start": "node index.js",
-    "watch": "webpack-dev-server --content-base public/",
-    "storybook": "start-storybook -p 9002"
+    "watch": "webpack-dev-server --content-base public/ --port 8000",
+    "storybook": "start-storybook -p 9002",
+    "lint": "eslint ./",
+    "lint:fix": "eslint --fix ./"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
