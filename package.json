@@ -12,7 +12,7 @@
   "scripts": {
     "start": "node index.js",
     "watch": "webpack-dev-server --content-base public/",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook -p 9002"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",

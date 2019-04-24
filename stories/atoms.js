@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/vue'
-import { withKnobs, select, text } from '@storybook/addon-knobs'
+import { withKnobs, select, text, boolean } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
-import { Button } from '../src/components/atoms'
+import { Button, Input, ChatBubble } from '../src/components/atoms'
 
 const stories = storiesOf('atoms', module)
 stories.addDecorator(withKnobs)
@@ -28,5 +28,36 @@ stories.add('Button', () => ({
       :color="$props.color"
       @click="onClick"
     >{{ $props.name }}</Button>
+  `
+}))
+
+stories.add('Input', () => ({
+  components: {
+    Input
+  },
+  data() {
+    return {
+      value: text('value', '入力')
+    }
+  },
+  template: `
+    <Input v-model="$data.value" />
+  `
+}))
+
+stories.add('ChatBubble', () => ({
+  components: {
+    ChatBubble
+  },
+  props: {
+    value: {
+      default: text('value', 'メッセージの内容')
+    },
+    fromMe: {
+      default: boolean('fromMe', false)
+    }
+  },
+  template: `
+    <ChatBubble :fromMe="$props.fromMe">{{ $props.value }}</ChatBubble>
   `
 }))

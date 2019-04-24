@@ -1,25 +1,28 @@
 <template lang="pug">
   div
-    button.button(
-      :class="{ 'button--primary': $props.color === 'primary' }"
-      @click="$emit('click')"
+    input.input(
+      :value="$props.value"
+      @change="$emit('change', $event.target.value)"
     )
-      slot
 </template>
 
 <script>
 import VueTypes from 'vue-types'
 
 export default {
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
-    color: VueTypes.oneOf(['primary', 'normal']).def('normal')
+    value: VueTypes.string.isRequired
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.button {
-  background-color: #eee;
+.input {
+  background-color: #fff;
   color: #333;
   display: block;
   box-sizing: border-box;
@@ -31,14 +34,8 @@ export default {
   outline: none;
   margin: 0;
 
-  &--primary {
-    background-color: #0070e8;
+  &:focus {
     border-color: #0070e8;
-    color: #fff;
-  }
-
-  &:active {
-    opacity: 0.4;
   }
 }
 </style>
