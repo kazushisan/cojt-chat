@@ -7,6 +7,8 @@ export default {}
 </script>
 
 <style lang="scss">
+@import './reset';
+
 body {
   background-color: #fff;
   color: #000;
