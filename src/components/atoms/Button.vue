@@ -32,6 +32,7 @@ export default {
   border: 1px #eee solid;
   outline: none;
   margin: 0;
+  font-size: inherit;
 
   &--primary {
     background-color: #1dd3b0;

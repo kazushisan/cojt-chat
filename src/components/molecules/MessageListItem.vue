@@ -2,7 +2,7 @@
   div
     .message-list-item
       UserImage(
-        style="flex: 0 0 auto;"
+        style="flex: 0 0 auto; height: 48px;"
         :image="$props.image"
         :width="48"
       )
@@ -19,7 +19,7 @@ export default {
     UserImage
   },
   props: {
-    image: VueTypes.string.def('/assets/person.svg').isRequired
+    image: VueTypes.string.isRequired
   }
 }
 </script>

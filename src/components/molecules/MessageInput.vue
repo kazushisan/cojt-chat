@@ -1,16 +1,15 @@
 <template lang="pug">
   div
     .message-input
-      textarea.message-input__area(
-        :value="$props.value"
-        :placeholder="$props.placeholder"
-        @change="$emit('change', $event.target.value)"
-      )
-      .message-input__button
-        Button(
-          color="primary"
-          @send="$emit('send')"
-        ) {{ $props.buttonText }}
+      .message-input__inner
+        textarea.message-input__area(
+          :value="$props.value"
+          :placeholder="$props.placeholder"
+          @change="$emit('change', $event.target.value)"
+        )
+        button.message-input__button(
+          @click="$emit('send')"
+        )
 </template>
 
 <script>
@@ -35,28 +34,44 @@ export default {
 
 <style lang="scss" scoped>
 .message-input {
-  display: flex;
-  background-color: #fff;
-  align-items: center;
-  border-top: 1px #eee solid;
-  height: 60px;
-  overflow: hidden;
+  &__inner {
+    display: flex;
+    background-color: #fff;
+    align-items: center;
+    border-top: 1px #eee solid;
+    height: 60px;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 
   &__area {
     flex: 1 0 0;
     font-size: 14px;
     line-height: 1.5;
     border: none;
-    padding: 20px 8px;
+    padding: 16px 20px 15px;
     align-self: stretch;
     resize: none;
     outline: none;
-    margin: 0 8px 0 0;
+    margin: 0 16px 0 0;
   }
 
   &__button {
     flex: 0 0 auto;
-    margin: 8px;
+    margin: 16px;
+    background-image: url('../../assets/send.svg');
+    background-size: cover;
+    width: 28px;
+    height: 28px;
+    border: none;
+    outline: none;
+
+    &:active {
+      opacity: 0.4;
+    }
   }
 }
 </style>

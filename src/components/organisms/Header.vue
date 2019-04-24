@@ -6,15 +6,11 @@
 </template>
 
 <script>
-import VueTypes from 'vue-types'
 import { UserImage } from '../atoms'
 
 export default {
   components: {
     UserImage
-  },
-  props: {
-    image: VueTypes.string.def('/assets/person.svg').isRequired
   }
 }
 </script>

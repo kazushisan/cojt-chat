@@ -37,6 +37,7 @@ export default {
   border: 1px #eee solid;
   outline: none;
   margin: 0;
+  font-size: inherit;
 
   &:focus {
     border-color: #1dd3b0;

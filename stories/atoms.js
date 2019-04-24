@@ -33,11 +33,13 @@ stories.add('Button', () => ({
     }
   },
   template: `
-    <Button
-      :color="$props.color"
-      :disabled="$props.disabled"
-      @click="onClick"
-    >{{ $props.name }}</Button>
+    <div style="margin: 20px;">
+      <Button
+        :color="$props.color"
+        :disabled="$props.disabled"
+        @click="onClick"
+      >{{ $props.name }}</Button>
+    </div>
   `
 }))
 
@@ -59,11 +61,13 @@ stories.add('Input', () => ({
     }
   },
   template: `
+    <div style="margin: 20px;">
       <Input
         v-model="$data.value"
         :placeholder="$props.placeholder"
         :disabled="$props.disabled"
       />
+    </div>
     `
 }))
 
@@ -80,7 +84,9 @@ stories.add('ChatBubble', () => ({
     }
   },
   template: `
-    <ChatBubble :fromMe="$props.fromMe">{{ $props.value }}</ChatBubble>
+    <div style="margin: 20px;">
+      <ChatBubble :fromMe="$props.fromMe">{{ $props.value }}</ChatBubble>
+    </div>
   `
 }))
 
@@ -100,6 +106,9 @@ stories.add('UserImage', () => ({
     }
   },
   template: `
-    <UserImage :image="$props.image" />
+    <UserImage
+      :image="$props.image"
+      :width="$props.width"
+    />
   `
 }))

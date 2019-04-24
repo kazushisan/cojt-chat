@@ -9,7 +9,6 @@ import VueTypes from 'vue-types'
 
 export default {
   props: {
-    value: VueTypes.string.isRequired,
     fromMe: VueTypes.bool.isRequired
   }
 }
