@@ -10,15 +10,18 @@
   },
   "scripts": {
     "start": "node index.js",
-    "watch": "webpack-dev-server --content-base public/"
+    "watch": "webpack-dev-server --content-base public/",
+    "storybook": "start-storybook"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
+    "@storybook/vue": "^5.0.10",
     "autoprefixer": "^9.5.1",
     "babel": "^6.23.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
+    "babel-preset-vue": "^2.0.2",
     "css-loader": "^2.1.1",
     "cssnano": "^4.1.10",
     "eslint": "^5.16.0",

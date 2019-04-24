@@ -17,6 +17,8 @@
 	],
 	"rules": {
 		"no-await-in-loop": 0,
-		"no-plusplus": 0
+		"no-plusplus": 0,
+		"import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+
 	}
 }
