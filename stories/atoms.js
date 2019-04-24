@@ -87,7 +87,10 @@ stories.add('ChatBubble', () => ({
   },
   template: `
     <div style="margin: 20px;">
-      <ChatBubble :fromMe="$props.fromMe">{{ $props.value }}</ChatBubble>
+      <ChatBubble
+        :fromMe="$props.fromMe"
+        :date="new Date()"
+      >{{ $props.value }}</ChatBubble>
     </div>
   `
 }))
