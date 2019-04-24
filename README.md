@@ -16,8 +16,12 @@
 - MongoDB
 - Vue
 - Vuex
+- Storybook
+- Webpack
+- ESLint
+- Prettier
 
-
+などなど...
 
 ## Setup
 
