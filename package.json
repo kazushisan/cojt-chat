@@ -1,7 +1,7 @@
 {
-  "name": "socket-chat-example",
+  "name": "cojt-chat",
   "version": "0.0.1",
-  "description": "my first socket.io app",
+  "description": "Sample Chat app for Campus OJT",
   "dependencies": {
     "express": "^4.15.2",
     "socket.io": "^1.7.3",
