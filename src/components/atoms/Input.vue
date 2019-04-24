@@ -27,7 +27,7 @@ export default {
 <style lang="scss" scoped>
 .input {
   background-color: #fff;
-  color: rgba(#000, 0.6);
+  color: rgba(#000, 0.8);
   display: block;
   box-sizing: border-box;
   width: 100%;
@@ -45,6 +45,10 @@ export default {
 
   &:disabled {
     opacity: 0.4;
+  }
+
+  &::placeholder {
+    color: rgba(#000, 0.3);
   }
 }
 </style>

@@ -1,5 +1,5 @@
 import { configure } from '@storybook/vue'
-require('!style-loader!css-loader!../src/_base.scss')
+require('../src/_base.scss')
 
 function loadStories() {
   require('../stories/atoms.js')

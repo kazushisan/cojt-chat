@@ -34,6 +34,7 @@ export default {
   display: flex;
   align-items: center;
   border-bottom: 1px #eee solid;
+  color: rgba(#000, 0.8);
 
   &__inner {
     margin-left: 24px;

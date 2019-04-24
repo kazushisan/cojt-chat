@@ -57,6 +57,11 @@ export default {
     resize: none;
     outline: none;
     margin: 0 16px 0 0;
+    color: rgba(#000, 0.8);
+
+    &::placeholder {
+      color: rgba(#000, 0.3);
+    }
   }
 
   &__button {
