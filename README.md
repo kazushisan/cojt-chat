@@ -27,6 +27,7 @@
 
 ```
 yarn install
+yarn watch
 docker-compose up
 ```
 
