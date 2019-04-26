@@ -7,7 +7,7 @@ createApp()
       console.log('API server listening on port 3000!')
     })
   })
-  .catch(err => {
+  .catch(() => {
     // eslint-disable-next-line no-console
-    console.error(err)
+    console.error('Failed to setup server')
   })

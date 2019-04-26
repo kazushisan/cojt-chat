@@ -1,8 +1,8 @@
 import express from 'express'
-import MessageController from '../controllers/MessageController'
+import messageController from '../controllers/MessageController'
 
 const router = express.Router()
 
-router.get('/message', MessageController.read)
+router.get('/message', messageController.read)
 
 export default router

@@ -21,12 +21,19 @@ export default () =>
       })
     )
 
-    mongoose.connect('mongodb://localhost/cojt-chat', {
+    app.get('/', (req, res) => {
+      res.send('hello world')
+    })
+
+    mongoose.connect('mongodb://localhost:27017/cojt-chat', {
       useNewUrlParser: true
     })
 
     const db = mongoose.connection
-    db.on('error', reject())
+
+    db.on('error', () => {
+      reject()
+    })
 
     db.once('open', () => {
       routes(app)
