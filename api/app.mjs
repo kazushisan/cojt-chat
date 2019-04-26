@@ -6,7 +6,7 @@ import mongoose from 'mongoose'
 import routes from './routes'
 
 export default () =>
-  new Promise(resolve => {
+  new Promise((resolve, reject) => {
     const app = express()
     app.use(compression())
     app.use(
@@ -21,9 +21,12 @@ export default () =>
       })
     )
 
-    mongoose.connect('mongodb://example:root@localhost:27017/cojt-chat')
+    mongoose.connect('mongodb://localhost/cojt-chat', {
+      useNewUrlParser: true
+    })
 
     const db = mongoose.connection
+    db.on('error', reject())
 
     db.once('open', () => {
       routes(app)

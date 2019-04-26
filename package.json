@@ -13,7 +13,7 @@
     "vue-types": "^1.5.3"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node --experimental-modules api/index.mjs",
     "watch": "webpack-dev-server --content-base public/ --port 8000",
     "storybook": "start-storybook -p 9002",
     "lint": "eslint ./",

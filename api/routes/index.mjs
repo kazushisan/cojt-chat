@@ -1,5 +1,7 @@
-const routes = app => {
-  console.log(app)
-}
+import authController from '../controllers/AuthController'
+import apiRoutes from './apiRoutes'
 
-export default routes
+export default app => {
+  app.get('/api/auth/login', authController.login.bind(authController))
+  app.use('/api', [authController.authenticate.bind(authController)], apiRoutes)
+}

@@ -12,8 +12,6 @@ class AuthController {
       const message = '認証に失敗しました'
       res.status(status).json({ status, message })
     }
-
-    next()
   }
 }
 
