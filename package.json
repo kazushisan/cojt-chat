@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Sample Chat app for Campus OJT",
   "dependencies": {
-    "express": "^4.15.2",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "express": "^4.16.4",
     "socket.io": "^1.7.3",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
@@ -36,6 +38,7 @@
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-vue": "^5.2.2",
+    "file-loader": "^3.0.1",
     "node-sass": "^4.11.0",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.17.0",
