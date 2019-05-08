@@ -4,12 +4,14 @@ import {
   select,
   text,
   boolean,
-  number
+  array,
+  number,
+  optionsKnob
 } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import { atoms } from '../src/components'
 
-const { Button, Input, ChatBubble, UserImage } = atoms
+const { Button, Input, SelectBox, ChatBubble, UserImage } = atoms
 
 const stories = storiesOf('atoms', module)
 stories.addDecorator(withKnobs)
@@ -41,6 +43,36 @@ stories.add('Button', () => ({
         :disabled="$props.disabled"
         @click="onClick"
       >{{ $props.name }}</Button>
+    </div>
+  `
+}))
+
+stories.add('SelectBox', () => ({
+  components: {
+    SelectBox
+  },
+  props: {
+    disabled: {
+      default: boolean('disabled', false)
+    },
+    options: {
+      default: array('string', [
+        { text: 'One', value: 'A' },
+        { text: 'Two', value: 'B' },
+        { text: 'Three', value: 'C'}
+      ])
+    }
+  },
+  template: `
+    <div style="margin: 20px;">
+      <SelectBox
+        :disabled="$props.disabled"
+      >
+      <option hidden>選択してください</option>     
+      <option v-for="choice in $props.options" value="choice.value">
+        {{ choice.text }}
+      </option>
+      </SelectBox>
     </div>
   `
 }))

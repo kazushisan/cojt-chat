@@ -1,6 +1,7 @@
 // atoms
 import Button from './atoms/Button.vue'
 import Input from './atoms/Input.vue'
+import SelectBox from './atoms/SelectBox.vue'
 import ChatBubble from './atoms/ChatBubble.vue'
 import UserImage from './atoms/UserImage.vue'
 
@@ -14,7 +15,7 @@ import Header from './organisms/Header.vue'
 // pages
 import Home from './pages/Home.vue'
 
-export const atoms = { Button, Input, ChatBubble, UserImage }
+export const atoms = { Button, Input, SelectBox, ChatBubble, UserImage }
 
 export const molecules = { MessageListItem, MessageInput }
 
