@@ -1,7 +1,12 @@
-// import mongoose from 'mongoose'
+import mongoose from 'mongoose'
 
-// const messageSchema = mongoose.Schema({
-// 	name: String,
-// 	password: String,
-// 	mail: String
-//   })
+const messageSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  content: String,
+  connection: { type: mongoose.Schema.Types.ObjectId, ref: 'Connection' },
+  from: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+})
+
+const MessageModel = mongoose.model('Connection', messageSchema)
+
+export default MessageModel
