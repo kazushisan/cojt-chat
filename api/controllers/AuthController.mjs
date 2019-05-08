@@ -56,11 +56,8 @@ class AuthController {
         return
       }
 
-      console.log(adventure)
-
       const status = 200
       const { _id, name } = adventure
-      console.log({ _id, name })
       const token = this.createToken({ _id, name })
       res.status(status).json({ _id, name, token })
     })
