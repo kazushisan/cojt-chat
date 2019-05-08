@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "node --experimental-modules api/index.mjs",
-    "watch": "webpack-dev-server --content-base public/ --port 8000",
+    "watch": "webpack-dev-server --content-base public/ --port 8000 --history-api-fallback",
     "storybook": "start-storybook -p 9002",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./"
