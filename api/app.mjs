@@ -21,10 +21,6 @@ export default () =>
       })
     )
 
-    app.get('/', (req, res) => {
-      res.send('hello world')
-    })
-
     mongoose.connect('mongodb://localhost:27017/cojt-chat', {
       useNewUrlParser: true
     })
