@@ -1,9 +1,18 @@
 <template lang="pug">
-	div new app
+  div
+    Header
+    #main
+      
 </template>
 
 <script>
-export default {}
+import Header from '../organisms/Header.vue'
+
+export default {
+  components: {
+    Header
+  }
+}
 </script>
 
 <style lang="scss" scoped>
