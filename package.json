@@ -18,8 +18,8 @@
     "start:dev": "nodemon yarn start",
     "watch": "webpack-dev-server --content-base public/ --port 8000 --history-api-fallback",
     "storybook": "start-storybook -p 9002",
-    "lint": "eslint ./",
-    "lint:fix": "eslint --fix ./"
+    "lint": "eslint  --ext .js,.vue ./",
+    "lint:fix": "eslint  --ext .js,.vue --fix ./"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -29,6 +29,7 @@
     "@storybook/addon-viewport": "^5.0.10",
     "@storybook/vue": "^5.0.10",
     "autoprefixer": "^9.5.1",
+    "axios": "^0.18.0",
     "babel": "^6.23.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",

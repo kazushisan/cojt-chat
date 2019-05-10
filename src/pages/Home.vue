@@ -6,18 +6,24 @@
         Input(
           placeholder="メールアドレス"
           style="margin-bottom: 16px;"
+          v-model="$data.loginForm.mail"
           )
         Input(
           type="password"
           placeholder="パスワード"
           style="margin-bottom: 32px;"
+          v-model="$data.loginForm.password"
         )
-        Button(color="primary") ログイン
+        Button(
+          color="primary"
+          @click="login"
+        ) ログイン
       
 </template>
 
 <script>
 import { atoms, organisms } from '../components'
+import api from '../services/api'
 
 const { Header } = organisms
 const { Button, Input } = atoms
@@ -27,6 +33,28 @@ export default {
     Header,
     Input,
     Button
+  },
+  data() {
+    return {
+      loginForm: {
+        mail: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    login() {
+      const { mail, password } = this.$data.loginForm
+
+      api
+        .login({ mail, password })
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(err => {
+          window.alert(err.response.data.message)
+        })
+    }
   }
 }
 </script>
