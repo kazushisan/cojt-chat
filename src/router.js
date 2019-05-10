@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-import { pages } from './components'
+import pages from './pages'
 
 const { Home } = pages
 

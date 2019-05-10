@@ -11,13 +11,8 @@ import MessageInput from './molecules/MessageInput.vue'
 // organisms
 import Header from './organisms/Header.vue'
 
-// pages
-import Home from './pages/Home.vue'
-
 export const atoms = { Button, Input, ChatBubble, UserImage }
 
 export const molecules = { MessageListItem, MessageInput }
 
 export const organisms = { Header }
-
-export const pages = { Home }
