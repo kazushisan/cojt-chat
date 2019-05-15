@@ -18,8 +18,8 @@
     "start:dev": "nodemon yarn start",
     "watch": "webpack-dev-server --content-base public/ --port 8000 --history-api-fallback",
     "storybook": "start-storybook -p 9002",
-    "lint": "eslint  --ext .js,.vue ./",
-    "lint:fix": "eslint  --ext .js,.vue --fix ./"
+    "lint": "eslint  --ext .js,.vue,.mjs ./",
+    "lint:fix": "eslint  --ext .js,.vue,.mjs --fix ./"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
