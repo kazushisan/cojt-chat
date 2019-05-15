@@ -50,9 +50,7 @@ export default {
         .login({ mail, password })
         .then(response => {
           const { name, token, _id } = response.data
-          this.$store.commit('name', name)
-          this.$store.commit('token', token)
-          this.$store.commit('_id', _id)
+          this.$store.commit('set', { name, token, _id })
         })
         .catch(err => {
           window.alert(err.response.data.message || 'unknown error')
