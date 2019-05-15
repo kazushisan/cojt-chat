@@ -14,21 +14,25 @@
             .message__item(
               v-for="message in $data.connections[1].messages"
               :key="message._id"
+              :class="{ 'message__item--me': message.from == $data.user._id }"
             )
               UserImage(
                 v-if="message.from !== $data.user._id"
                 :width="32"
+                :style="{ marginRight: '8px' }"
               )
               div
                 div(
-                  v-if="message.from !== $data.user._id && $data.connections[0].users.length > 2"
-                ) {{ $data.connection[1].users.find(user => user._id == $message.from).name }}
+                  v-if="message.from !== $data.user._id && $data.connections[1].users.length > 2"
+                  :style="{ fontSize: '12px', color: 'rgba(0, 0, 0, 0.3)' }"
+                ) {{ $data.connections[1].users.find(user => user._id == message.from).name }}
                 ChatBubble(
-                  :fromMe="message.from !== $data.user._id"
+                  :fromMe="message.from == $data.user._id"
                   :date="message.createdAt"
                 ) {{ message.content }}
           MessageInput(
             v-model="$data.input"
+            style="flex: 0 0 auto;"
           )
 </template>
 
@@ -123,7 +127,7 @@ export default {
             },
             {
               _id: 'gg',
-              content: '適当なメッセージの返信その2',
+              content: '適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2',
               from: 'ff',
               createdAt: new Date()
             }
@@ -160,6 +164,24 @@ export default {
 
   &__detail {
     position: relative;
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+  }
+}
+
+.message {
+  flex: 1 0 0;
+  padding: 20px;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+
+    &--me {
+      flex-direction: row-reverse;
+    }
   }
 }
 </style>
