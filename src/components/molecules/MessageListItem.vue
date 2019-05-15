@@ -22,7 +22,7 @@ export default {
   },
   props: {
     user: VueTypes.string.isRequired,
-    image: VueTypes.string.isRequired
+    image: VueTypes.string
   }
 }
 </script>

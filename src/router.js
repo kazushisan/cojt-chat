@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import pages from './pages'
 
-const { Home } = pages
+const { Home, Main } = pages
 
 Vue.use(Router)
 
@@ -12,6 +12,10 @@ export default new Router({
     {
       path: '/',
       component: Home
+    },
+    {
+      path: '/main',
+      component: Main
     }
   ]
 })
