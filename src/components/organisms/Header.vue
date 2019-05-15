@@ -3,7 +3,7 @@
     header.header
       .header__inner
         h1.header__title Sample Chat App
-        .header__button(@click="() => { $data.showHeaderOptions !== $data.showHeaderOptions }")
+        .header__button(@click="() => { $data.showHeaderOptions = !$data.showHeaderOptions }")
           .header__option(v-if="$data.showHeaderOptions") Option
 
 </template>
@@ -58,8 +58,6 @@ export default {
     background-size: cover;
     width: 28px;
     height: 28px;
-    border: none;
-    outline: none;
     position: relative;
     cursor: pointer;
 
@@ -70,17 +68,16 @@ export default {
 
   &__option {
     position: absolute;
-    top: 2rem;
-    right: 5px;
+    top: 32px;
+    right: 8px;
     border-radius: 4px;
-    min-width: 10em;
-    min-height: 5em;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid #efefef;
     background-color: #fff;
-    box-shadow: 0 2px 3px #eee;
+    box-shadow: 0 2px 3px rgba(#000, 0.1);
   }
 }
 </style>
