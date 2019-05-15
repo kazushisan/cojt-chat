@@ -1,6 +1,6 @@
 <template lang="pug">
-  div
-    Header
+  div(style="display: flex; flex-direction: column; height: 100vh;")
+    Header(style="flex: 0 0 auto;")
     .main
       .main__inner
         .main__side
@@ -140,4 +140,26 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.main {
+  position: relative;
+  flex: 1 0 0;
+  display: flex;
+
+  &__inner {
+    display: flex;
+    flex: 1 0 0;
+  }
+
+  &__side {
+    flex: 0 0 auto;
+    width: 400px;
+    overflow-y: scroll;
+    border-right: 1px #eee solid;
+  }
+
+  &__detail {
+    position: relative;
+  }
+}
+</style>
