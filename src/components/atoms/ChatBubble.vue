@@ -39,6 +39,7 @@ export default {
     margin: 0 16px;
     color: rgba(#000, 0.3);
     font-size: 12px;
+    white-space: nowrap;
   }
 
   &--from-me {
