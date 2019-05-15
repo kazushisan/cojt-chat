@@ -3,8 +3,8 @@
     header.header
       .header__inner
         h1.header__title Sample Chat App
-        .header__button(@click="toggleHeaderOption")
-          .header__option(v-if="isShowHeaderOption") Option
+        .header__button(@click="() => { $data.showHeaderOptions !== $data.showHeaderOptions }")
+          .header__option(v-if="$data.showHeaderOptions") Option
 
 </template>
 
@@ -17,12 +17,7 @@ export default {
   },
   data() {
     return {
-      isShowHeaderOption: false
-    }
-  },
-  methods: {
-    toggleHeaderOption: function() {
-      this.isShowHeaderOption = !this.isShowHeaderOption
+      showHeaderOptions: false
     }
   }
 }
@@ -55,6 +50,7 @@ export default {
     display: block;
     margin-top: 61px;
   }
+
   &__button {
     flex: 0 0 auto;
     margin: 16px;
@@ -66,10 +62,12 @@ export default {
     outline: none;
     position: relative;
     cursor: pointer;
+
     &:active {
       opacity: 0.4;
     }
   }
+
   &__option {
     position: absolute;
     top: 2rem;
