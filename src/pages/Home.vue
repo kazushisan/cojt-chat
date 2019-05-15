@@ -49,10 +49,13 @@ export default {
       api
         .login({ mail, password })
         .then(response => {
-          console.log(response.data)
+          const { name, token, _id } = response.data
+          this.$store.commit('name', name)
+          this.$store.commit('token', token)
+          this.$store.commit('_id', _id)
         })
         .catch(err => {
-          window.alert(err.response.data.message)
+          window.alert(err.response.data.message || 'unknown error')
         })
     }
   }
