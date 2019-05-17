@@ -34,6 +34,27 @@ class UserController {
       })
   }
 
+  addContact(req, res) {
+    UserModel.findById(req.login._id)
+      .then(async document => {
+        const { _id } = await UserModel.findOne({ name: req.params.name })
+
+        if (document.contact) {
+          document.contacts.append(_id)
+        } else {
+          document.contacts = [_id]
+        }
+        return document.save()
+      })
+      .then(() => {
+        res.status(200).json({ message: 'success' })
+      })
+      .catch(err => {
+        res.status(503).json({ message: 'database error' })
+        console.log(err)
+      })
+  }
+
   assertNoDuplicate(name, mail) {
     return new Promise((resolve, reject) => {
       UserModel.find()

@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema(
     name: String,
     password: String,
     mail: String,
-    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    contacts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
   },
   {
     timestamps: true
