@@ -5,8 +5,7 @@ import {
   text,
   boolean,
   array,
-  number,
-  optionsKnob
+  number
 } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import { atoms } from '../src/components'
@@ -52,26 +51,31 @@ stories.add('SelectBox', () => ({
     SelectBox
   },
   props: {
+    prompt: {
+      default: text('promptSelect', '選択してください')
+    },
     disabled: {
       default: boolean('disabled', false)
     },
     options: {
-      default: array('string', [
-        { text: 'One', value: 'A' },
-        { text: 'Two', value: 'B' },
-        { text: 'Three', value: 'C'}
-      ])
+      default: array('option', ['Apple', 'Grapes', 'Cherry', 'Strawberry'])
+    },
+    methods: {
+      onChange() {
+        action('changed', selectedOption => {
+          return selectedOption
+        })()
+      }
     }
   },
   template: `
     <div style="margin: 20px;">
       <SelectBox
         :disabled="$props.disabled"
+        @change="onChange"
       >
-      <option hidden>選択してください</option>     
-      <option v-for="choice in $props.options" value="choice.value">
-        {{ choice.text }}
-      </option>
+        <option disabled selected >{{ $props.prompt }}</option>
+        <option v-for="opt in $props.options" value="opt">{{ opt }}</option>
       </SelectBox>
     </div>
   `
