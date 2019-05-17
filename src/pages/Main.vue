@@ -1,6 +1,5 @@
 <template lang="pug">
   div(style="display: flex; flex-direction: column; height: 100vh;")
-    Header(style="flex: 0 0 auto;")
     .main
       .main__inner
         .main__side
@@ -150,6 +149,7 @@ export default {
   position: relative;
   flex: 1 0 0;
   display: flex;
+  background-color: #fafafa;
 
   &__inner {
     display: flex;
@@ -160,7 +160,6 @@ export default {
     flex: 0 0 auto;
     width: 400px;
     overflow-y: scroll;
-    border-right: 1px #eee solid;
   }
 
   &__detail {
@@ -168,6 +167,11 @@ export default {
     display: flex;
     flex: 1 0 0;
     flex-direction: column;
+    overflow: hidden;
+    border-radius: 16px;
+    background-color: #fff;
+    margin: 16px;
+    box-shadow: 0 2px 8px rgba(#000, 0.05);
   }
 }
 

@@ -30,10 +30,8 @@ export default {
 <style lang="scss" scoped>
 .message-list-item {
   padding: 20px;
-  background-color: #fff;
   display: flex;
   align-items: center;
-  border-bottom: 1px #eee solid;
   color: rgba(#000, 0.8);
 
   &__inner {
