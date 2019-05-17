@@ -2,10 +2,12 @@
 // import http from 'http'
 
 import authController from '../controllers/AuthController'
+import userController from '../controllers/UserController'
 import apiRoutes from './apiRoutes'
 
 export default app => {
   app.post('/api/auth/login', authController.login.bind(authController))
+  app.post('/api/user/create', userController.create)
   app.use('/api', [authController.authenticate.bind(authController)], apiRoutes)
   // app.use('/api', apiRoutes)
 

@@ -1,4 +1,4 @@
-import MessageModel from '../models/MessageModel'
+// import MessageModel from '../models/MessageModel'
 
 class MessageController {
   read(req, res) {
