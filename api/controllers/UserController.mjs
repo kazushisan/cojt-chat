@@ -12,7 +12,7 @@ class UserController {
     }
 
     this.assertNoDuplicate(name, mail)
-      .then(
+      .then(() =>
         UserModel.create({
           _id: new mongoose.Types.ObjectId(),
           name,

@@ -6,7 +6,8 @@ const userSchema = mongoose.Schema(
     displayName: String,
     name: String,
     password: String,
-    mail: String
+    mail: String,
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
   },
   {
     timestamps: true
