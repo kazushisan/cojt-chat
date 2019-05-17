@@ -22,7 +22,8 @@ class UserController {
         })
       )
       .then(document => {
-        res.status(200).json(document)
+        const { _id } = document
+        res.status(200).json({ _id })
       })
       .catch(err => {
         if (err.message === 'duplicate') {
@@ -34,13 +35,33 @@ class UserController {
       })
   }
 
+  get(req, res) {
+    this.findById(req.login._id)
+      .then(document =>
+        document
+          .populate({
+            path: 'contacts',
+            select: 'displayName _id name'
+          })
+          .execPopulate()
+      )
+      .then(document => {
+        const { name, displayName, mail, _id, contacts } = document
+        res.status(200).json({ name, displayName, mail, _id, contacts })
+      })
+      .catch(err => {
+        res.status(503).json({ message: 'database error' })
+        console.log(err)
+      })
+  }
+
   addContact(req, res) {
-    UserModel.findById(req.login._id)
+    this.findById(req.login._id)
       .then(async document => {
         const { _id } = await UserModel.findOne({ name: req.params.name })
 
-        if (document.contact) {
-          document.contacts.append(_id)
+        if (document.contacts && document.contacts.indexOf(_id) === -1) {
+          document.contacts.push(_id)
         } else {
           document.contacts = [_id]
         }
@@ -53,6 +74,20 @@ class UserController {
         res.status(503).json({ message: 'database error' })
         console.log(err)
       })
+  }
+
+  findById(id) {
+    return new Promise((resolve, reject) => {
+      UserModel.findById(id).exec((err, document) => {
+        if (err) {
+          reject(err)
+        } else if (!document) {
+          reject(new Error('user not found'))
+        } else {
+          resolve(document)
+        }
+      })
+    })
   }
 
   assertNoDuplicate(name, mail) {

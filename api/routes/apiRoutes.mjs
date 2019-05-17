@@ -6,6 +6,7 @@ const router = express.Router()
 
 router.get('/message', messageController.read)
 router.post('/message', messageController.create)
+router.get('/user', userController.get.bind(userController))
 router.put(
   '/user/contacts/:name',
   userController.addContact.bind(userController)
