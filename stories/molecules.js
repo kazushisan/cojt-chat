@@ -3,7 +3,7 @@ import { withKnobs, text } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import { molecules } from '../src/components'
 
-const { MessageListItem, MessageInput } = molecules
+const { MessageListItem, MessageInput, UserListItem } = molecules
 
 const stories = storiesOf('molecules', module)
 stories.addDecorator(withKnobs)
@@ -69,5 +69,34 @@ stories.add('MessageInput', () => ({
       :placeholder="$props.placeholder"
       @send="onSend"
     />
+	`
+}))
+
+stories.add('UserListItem', () => ({
+  components: {
+    UserListItem
+  },
+  props: {
+    image: {
+      default: text(
+        'image',
+        'https://avatars2.githubusercontent.com/u/29304238?s=460&v=4'
+      )
+    },
+    user: {
+      default: text('user', 'ユーザ名')
+    }
+  },
+  methods: {
+    onClick() {
+      action('clicked')()
+    }
+  },
+  template: `
+	  <UserListItem
+      :user="$props.user"
+      :image="$props.image"
+		  @click="onClick"
+	  />
 	`
 }))

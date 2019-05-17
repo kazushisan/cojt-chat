@@ -4,6 +4,7 @@
       :value="$props.value"
       :placeholder="$props.placeholder"
       :disabled="$props.disabled"
+      :type="$props.type"
       @change="$emit('change', $event.target.value)"
     )
 </template>
@@ -18,6 +19,7 @@ export default {
   },
   props: {
     value: VueTypes.string.isRequired,
+    type: VueTypes.oneOf(['text', 'password']).def('text'),
     placeholder: VueTypes.string.def(''),
     disabled: VueTypes.bool.def(false)
   }

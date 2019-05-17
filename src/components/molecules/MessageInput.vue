@@ -41,10 +41,6 @@ export default {
     border-top: 1px #eee solid;
     height: 60px;
     overflow: hidden;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
   }
 
   &__area {

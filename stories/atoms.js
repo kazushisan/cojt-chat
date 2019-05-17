@@ -91,6 +91,9 @@ stories.add('Input', () => ({
     },
     disabled: {
       default: boolean('disabled', false)
+    },
+    type: {
+      default: select('type', ['text', 'password'], 'text')
     }
   },
   data() {
@@ -104,6 +107,7 @@ stories.add('Input', () => ({
         v-model="$data.value"
         :placeholder="$props.placeholder"
         :disabled="$props.disabled"
+        :type="$props.type"
       />
     </div>
     `

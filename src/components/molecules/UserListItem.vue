@@ -1,15 +1,13 @@
 <template lang="pug">
   div
-    .message-list-item
+    .user-list-item
       UserImage(
-        style="flex: 0 0 auto; height: 48px;"
+        style="flex: 0 0 auto; height: 32px;"
         :image="$props.image"
-        :width="48"
+        :width="32"
       )
-      .message-list-item__inner
+      .user-list-item__inner
         div {{ $props.user }}
-        div(style="color: rgba(0,0,0,0.3);")
-          slot
 </template>
 
 <script>
@@ -28,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.message-list-item {
+.user-list-item {
   padding: 20px;
   background-color: #fff;
   display: flex;

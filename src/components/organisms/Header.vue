@@ -3,6 +3,9 @@
     header.header
       .header__inner
         h1.header__title Sample Chat App
+        .header__button(@click="() => { $data.showHeaderOptions = !$data.showHeaderOptions }")
+          .header__option(v-if="$data.showHeaderOptions") Option
+
 </template>
 
 <script>
@@ -11,6 +14,11 @@ import UserImage from '../atoms/UserImage.vue'
 export default {
   components: {
     UserImage
+  },
+  data() {
+    return {
+      showHeaderOptions: false
+    }
   }
 }
 </script>
@@ -41,6 +49,35 @@ export default {
     content: '';
     display: block;
     margin-top: 61px;
+  }
+
+  &__button {
+    flex: 0 0 auto;
+    margin: 16px;
+    background-image: url('../../assets/ellipsis-v.svg');
+    background-size: cover;
+    width: 28px;
+    height: 28px;
+    position: relative;
+    cursor: pointer;
+
+    &:active {
+      opacity: 0.4;
+    }
+  }
+
+  &__option {
+    position: absolute;
+    top: 32px;
+    right: 8px;
+    border-radius: 4px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #efefef;
+    background-color: #fff;
+    box-shadow: 0 2px 3px rgba(#000, 0.1);
   }
 }
 </style>
