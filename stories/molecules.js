@@ -83,8 +83,11 @@ stories.add('UserListItem', () => ({
         'https://avatars2.githubusercontent.com/u/29304238?s=460&v=4'
       )
     },
-    user: {
+    displayName: {
       default: text('user', 'ユーザ名')
+    },
+    name: {
+      default: text('user', 'username')
     }
   },
   methods: {
@@ -94,7 +97,8 @@ stories.add('UserListItem', () => ({
   },
   template: `
 	  <UserListItem
-      :user="$props.user"
+      :name="$props.name"
+      :displayName="$props.displayName"
       :image="$props.image"
 		  @click="onClick"
 	  />
