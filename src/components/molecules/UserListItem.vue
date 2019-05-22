@@ -2,14 +2,14 @@
   div
     .user-list-item
       UserImage(
-        style="flex: 0 0 auto; height: 40px;"
+        style="flex: 0 0 auto; height: 32px;"
         :image="$props.image"
-        :width="40"
+        :width="32"
       )
       .user-list-item__inner
-        div {{ $props.displayName }}
-        div(style="color: rgba(0,0,0,0.3);")
-          slot {{ $props.name }}
+        div
+          span {{ $props.displayName }}
+          span(style="color: rgba(0,0,0,0.3); margin-left: 8px;") {{ $props.name }}
 </template>
 
 <script>
