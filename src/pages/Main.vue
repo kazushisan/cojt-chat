@@ -168,9 +168,7 @@ export default {
     flex: 1 0 0;
     flex-direction: column;
     overflow: hidden;
-    border-radius: 16px;
     background-color: #fff;
-    margin: 16px;
     box-shadow: 0 2px 8px rgba(#000, 0.05);
   }
 }
