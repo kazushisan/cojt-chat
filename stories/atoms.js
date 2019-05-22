@@ -4,12 +4,13 @@ import {
   select,
   text,
   boolean,
-  number
+  number,
+  array
 } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import { atoms } from '../src/components'
 
-const { Button, Input, ChatBubble, UserImage } = atoms
+const { Button, Input, ChatBubble, UserImage, PillSelector } = atoms
 
 const stories = storiesOf('atoms', module)
 stories.addDecorator(withKnobs)
@@ -118,6 +119,28 @@ stories.add('UserImage', () => ({
     <UserImage
       :image="$props.image"
       :width="$props.width"
+    />
+  `
+}))
+
+stories.add('PillSelector', () => ({
+  components: {
+    PillSelector
+  },
+  props: {
+    options: {
+      default: array('options', ['Messages', 'Contacts'])
+    }
+  },
+  data() {
+    return {
+      value: ''
+    }
+  },
+  template: `
+    <PillSelector
+      :options="$props.options"
+      v-model="$data.value"
     />
   `
 }))
