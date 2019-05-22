@@ -1,11 +1,11 @@
 <template lang="pug">
   div
     .pill
-      .pill__inner
+      .pill__inner(ref="pillInner")
         button.pill__item(
-          v-for="option in $props.options" :key="option"
-          :class="{ 'pill__item--selected': option === $props.value }"
-          @click="change(option, $event)"
+          v-for="(option, index) in $props.options" :key="option"
+          :class="{ 'pill__item--selected': option === $props.options[$props.value] }"
+          @click="change(index, $event)"
         ) {{ option }}
         .pill__background(
           :style="{ width: $data.width + 'px', left: $data.left + 'px' }"
@@ -22,7 +22,7 @@ export default {
   },
   props: {
     options: VueTypes.array.isRequired,
-    value: VueTypes.string.isRequired
+    value: VueTypes.number.isRequired
   },
   data() {
     return {
@@ -30,9 +30,19 @@ export default {
       left: 0
     }
   },
+  mounted() {
+    const parentLeft = this.$refs.pillInner.getBoundingClientRect().left
+    const {
+      left,
+      right
+    } = this.$refs.pillInner.firstElementChild.getBoundingClientRect()
+
+    this.$data.width = right - left
+    this.$data.left = left - parentLeft
+  },
   methods: {
-    change(option, event) {
-      this.$emit('change', option)
+    change(index, event) {
+      this.$emit('change', index)
       const parentLeft = event.target.parentElement.getBoundingClientRect().left
       const { left, right } = event.target.getBoundingClientRect()
       this.$data.width = right - left

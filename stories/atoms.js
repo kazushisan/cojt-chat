@@ -134,7 +134,7 @@ stories.add('PillSelector', () => ({
   },
   data() {
     return {
-      value: ''
+      value: 0
     }
   },
   template: `

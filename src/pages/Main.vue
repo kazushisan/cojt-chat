@@ -3,11 +3,25 @@
     .main
       .main__inner
         .main__side
-          MessageListItem(
-            v-for="connection in $data.connections"
-            :key="connection._id",
-            :user="connection.users.filter(user => user._id !== $data.user._id).map(user => user.name).join(', ')"
-          ) {{ connection.messages.slice(-1)[0].content }}
+          PillSelector(
+            v-model="$data.selectedTab"
+            :options="['Messages', 'Contacts']"
+            style="padding: 40px 20px;"
+          )
+          .tab(:style="{ marginLeft: $data.selectedTab * -100 + '%' }")
+            .tab__item
+              MessageListItem(
+                v-for="connection in $data.connections"
+                :key="connection._id",
+                :user="connection.users.filter(user => user._id !== $data.user._id).map(user => user.name).join(', ')"
+              ) {{ connection.messages.slice(-1)[0].content }}
+            .tab__item
+              UserListItem(
+                v-for="user in $data.users"
+                :key="user._id"
+                :name="user.name"
+                :displayName="user.displayName"
+              )
         .main__detail
           .message
             .message__item(
@@ -39,9 +53,9 @@
 import { atoms, organisms, molecules } from '../components'
 // import api from '../services/api'
 
-const { ChatBubble, UserImage } = atoms
+const { ChatBubble, UserImage, PillSelector } = atoms
 const { Header } = organisms
-const { MessageListItem, MessageInput } = molecules
+const { MessageListItem, MessageInput, UserListItem } = molecules
 
 export default {
   components: {
@@ -49,10 +63,13 @@ export default {
     MessageListItem,
     MessageInput,
     ChatBubble,
-    UserImage
+    UserImage,
+    UserListItem,
+    PillSelector
   },
   data() {
     return {
+      selectedTab: 0,
       connections: [
         {
           _id: 'a',
@@ -138,6 +155,24 @@ export default {
         _id: 'bb',
         name: 'ユーザ名2'
       },
+      users: [
+        {
+          _id: 'aa',
+          name: 'ユーザ1',
+          displayName: 'user1'
+        },
+        {
+          _id: 'bb',
+          name: 'ユーザ2',
+          displayName: 'user2'
+        },
+        {
+          _id: 'cc',
+          name: 'ユーザ3',
+          displayName: 'user3'
+        }
+      ],
+
       input: ''
     }
   }
@@ -185,6 +220,19 @@ export default {
     &--me {
       flex-direction: row-reverse;
     }
+  }
+}
+
+.tab {
+  display: flex;
+  position: relative;
+  width: 100%;
+  transition: all 0.3s;
+
+  &__item {
+    flex: 0 0 auto;
+    width: 100%;
+    position: relative;
   }
 }
 </style>
