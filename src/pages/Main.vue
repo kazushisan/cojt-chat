@@ -8,8 +8,8 @@
             :options="['Messages', 'Contacts']"
             style="padding: 40px 20px;"
           )
-          .tab(:style="{ marginLeft: $data.selectedTab * -100 + '%' }")
-            .tab__item
+          .tab
+            .tab__item(:style="{ marginLeft: $data.selectedTab * -100 + '%' }")
               MessageListItem(
                 v-for="connection in $data.connections"
                 :key="connection._id",
@@ -158,18 +158,18 @@ export default {
       users: [
         {
           _id: 'aa',
-          name: 'ユーザ1',
-          displayName: 'user1'
+          name: 'username1',
+          displayName: 'ユーザ名1'
         },
         {
           _id: 'bb',
-          name: 'ユーザ2',
-          displayName: 'user2'
+          name: 'username2',
+          displayName: 'ユーザの名前'
         },
         {
           _id: 'cc',
-          name: 'ユーザ3',
-          displayName: 'user3'
+          name: 'username3',
+          displayName: 'ユーザ3'
         }
       ],
 
@@ -227,12 +227,13 @@ export default {
   display: flex;
   position: relative;
   width: 100%;
-  transition: all 0.3s;
+  overflow: hidden;
 
   &__item {
     flex: 0 0 auto;
     width: 100%;
     position: relative;
+    transition: all 0.3s;
   }
 }
 </style>
