@@ -205,6 +205,7 @@ export default {
     overflow: hidden;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(#000, 0.05);
+    border-radius: 16px 0 0 16px;
   }
 }
 
