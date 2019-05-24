@@ -1,16 +1,14 @@
+import User from '../models/User'
+
 const UserStore = {
   state: {
-    _id: '',
-    displayName: '',
-    name: '',
-    password: '',
-    mail: ''
+    user: new User()
   },
 
   mutations: {
     set(state, payload) {
       Object.keys(payload).forEach(key => {
-        state[key] = payload[key]
+        state.user[key] = payload[key]
       })
     }
   }
