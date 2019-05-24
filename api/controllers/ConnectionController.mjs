@@ -20,7 +20,7 @@ class ConnectionController {
   }
 
   findOrCreate(req, res) {
-    Connection.findOne({ users: [req.login._id, req.body_id] })
+    Connection.findOne({ users: [req.login._id, req.params.id] })
       .select('_id name users updateAt')
       .populate({
         path: 'users',
@@ -34,7 +34,7 @@ class ConnectionController {
         } else {
           Connection.create({
             _id: new new mongoose.Types.ObjectId()(),
-            users: [req.login._id, req.body._id],
+            users: [req.login._id, req.params.id],
             name: ''
           })
             .then(document =>

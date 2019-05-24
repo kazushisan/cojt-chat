@@ -18,5 +18,9 @@ router.put(
 
 // connection
 router.get('/connection', connectionController.list.bind(connectionController))
+router.get(
+  '/connection/:id',
+  connectionController.findOrCreate(connectionController)
+)
 
 export default router
