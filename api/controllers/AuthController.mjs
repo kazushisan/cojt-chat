@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import UserModel from '../models/UserModel'
+import User from '../models/User'
 
 class AuthController {
   constructor() {
@@ -41,7 +41,7 @@ class AuthController {
   login(req, res) {
     const { mail, password } = req.body
 
-    UserModel.findOne({ mail, password }).exec((err, adventure) => {
+    User.findOne({ mail, password }).exec((err, adventure) => {
       if (err) {
         const status = 503
         const message = 'internal server error'

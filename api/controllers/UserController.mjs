@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import UserModel from '../models/UserModel'
+import User from '../models/User'
 
 class UserController {
   create(req, res) {
@@ -13,7 +13,7 @@ class UserController {
 
     this.assertNoDuplicate(name, mail)
       .then(() =>
-        UserModel.create({
+        User.create({
           _id: new mongoose.Types.ObjectId(),
           name,
           displayName,
@@ -58,7 +58,7 @@ class UserController {
   addContact(req, res) {
     this.findById(req.login._id)
       .then(async document => {
-        const { _id } = await UserModel.findOne({ name: req.params.name })
+        const { _id } = await User.findOne({ name: req.params.name })
 
         if (document.contacts && document.contacts.indexOf(_id) === -1) {
           document.contacts.push(_id)
@@ -78,7 +78,7 @@ class UserController {
 
   findById(id) {
     return new Promise((resolve, reject) => {
-      UserModel.findById(id).exec((err, document) => {
+      User.findById(id).exec((err, document) => {
         if (err) {
           reject(err)
         } else if (!document) {
@@ -92,7 +92,7 @@ class UserController {
 
   assertNoDuplicate(name, mail) {
     return new Promise((resolve, reject) => {
-      UserModel.find()
+      User.find()
         .or([{ name }, { mail }])
         .exec((err, result) => {
           if (err) {

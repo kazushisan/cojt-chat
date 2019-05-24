@@ -1,4 +1,4 @@
-// import MessageModel from '../models/MessageModel'
+// import Message from '../models/Message'
 
 class MessageController {
   read(req, res) {
@@ -8,7 +8,7 @@ class MessageController {
   create(req, res) {
     // const { content, connection } = req.body
     // const from = req.login._id
-    // const message = new MessageModel({
+    // const message = new Message({
     // })
     res.status(200).json({ message: 'successfully created' })
   }
