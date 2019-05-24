@@ -25,7 +25,7 @@ export default () =>
       res.header('Access-Control-Allow-Origin', 'http://localhost:8000')
       res.header(
         'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept'
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
       )
       res.header(
         'Access-Control-Allow-Methods',

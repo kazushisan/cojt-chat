@@ -1,4 +1,5 @@
 const AuthStore = {
+  namespaced: true,
   state: {
     token: ''
   },

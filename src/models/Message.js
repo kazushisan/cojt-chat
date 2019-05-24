@@ -1,5 +1,5 @@
 class Message {
-  constructor(args) {
+  constructor(args = {}) {
     this._id = args._id
     this.content = args.content
     this.connection = args.connection

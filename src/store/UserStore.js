@@ -1,15 +1,14 @@
 import User from '../models/User'
 
 const UserStore = {
+  namespaced: true,
   state: {
     user: new User()
   },
 
   mutations: {
     set(state, payload) {
-      Object.keys(payload).forEach(key => {
-        state.user[key] = payload[key]
-      })
+      state.user = new User(payload)
     }
   }
 }

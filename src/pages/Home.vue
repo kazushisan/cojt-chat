@@ -49,11 +49,17 @@ export default {
       api
         .login({ mail, password })
         .then(response => {
-          const { name, token, _id } = response.data
-          this.$store.commit('set', { name, token, _id })
+          const { token } = response.data
+          this.$store.commit('AuthStore/setToken', token)
+          return api.getUser(this.$store.state.AuthStore.token)
+        })
+        .then(response => {
+          this.$store.commit('UserStore/set', response.data)
+
+          this.$router.push({ path: '/main' })
         })
         .catch(err => {
-          window.alert(err.response.data.message || 'unknown error')
+          console.log(err)
         })
     }
   }

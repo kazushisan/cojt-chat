@@ -4,11 +4,26 @@ const config = {
   baseURL: 'http://localhost:3000/api'
 }
 
+const http = axios.create(config)
+
 class api {
   static async login(data) {
-    const response = axios.post('/auth/login', data, config).catch(err => {
-      throw new Error(err)
+    const response = await http.post('/auth/login', data).catch(err => {
+      throw err
     })
+    return response
+  }
+
+  static async getUser(token) {
+    const response = await http
+      .get('/user', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .catch(err => {
+        throw err
+      })
     return response
   }
 }
