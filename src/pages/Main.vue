@@ -21,6 +21,7 @@
                 :key="user._id"
                 :name="user.name"
                 :displayName="user.displayName"
+                @click="clickContact(user._id)"
               )
         .main__detail
           .message
@@ -51,7 +52,7 @@
 
 <script>
 import { atoms, organisms, molecules } from '../components'
-// import api from '../services/api'
+import api from '../services/api'
 
 const { ChatBubble, UserImage, PillSelector } = atoms
 const { Header } = organisms
@@ -174,6 +175,29 @@ export default {
       ],
 
       input: ''
+    }
+  },
+  mounted() {
+    this.listConnection()
+  },
+  methods: {
+    async listConnection() {
+      const response = await api
+        .listConnection(this.$store.state.AuthStore.token)
+        .catch(err => {
+          console.log(err)
+        })
+
+      console.log(response)
+    },
+    async clickContact(id) {
+      const response = await api
+        .findOrCreateConnection(this.$store.state.AuthStore.token, id)
+        .catch(err => {
+          console.log(err)
+        })
+      console.log(response)
+      await this.listConnection()
     }
   }
 }

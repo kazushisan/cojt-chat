@@ -39,6 +39,19 @@ class api {
       })
     return response
   }
+
+  static async findOrCreateConnection(token, id) {
+    const response = await http
+      .get(`/connection/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .catch(err => {
+        throw err
+      })
+    return response
+  }
 }
 
 export default api

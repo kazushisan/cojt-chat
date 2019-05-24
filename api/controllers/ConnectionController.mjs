@@ -3,7 +3,7 @@ import Connection from '../models/Connection'
 
 class ConnectionController {
   list(req, res) {
-    Connection.find({ users: [req.login._id] })
+    Connection.find({ users: { $all: req.login._id } })
       .sort({ updateAt: -1 })
       .select('_id name users updateAt')
       .populate({
@@ -20,8 +20,12 @@ class ConnectionController {
   }
 
   findOrCreate(req, res) {
-    Connection.findOne({ users: [req.login._id, req.params.id] })
+    Connection.find()
+      .where('users')
+      .all([req.login._id, req.params.id])
+      .size(2)
       .select('_id name users updateAt')
+      .limit(1)
       .populate({
         path: 'users',
         select: 'displayName _id name'
@@ -29,11 +33,14 @@ class ConnectionController {
       .exec((err, result) => {
         if (err) {
           res.status(503).json({ message: 'database error' })
-        } else if (result._id) {
-          res.status(200).json(result)
+        } else if (result.length === 1) {
+          console.log('found')
+          console.log(result)
+          res.status(200).json(result[0])
         } else {
+          console.log('not found')
           Connection.create({
-            _id: new new mongoose.Types.ObjectId()(),
+            _id: new mongoose.Types.ObjectId(),
             users: [req.login._id, req.params.id],
             name: ''
           })
@@ -46,6 +53,7 @@ class ConnectionController {
                 .execPopulate()
             )
             .then(document => {
+              console.log(document)
               const { _id, name, users, updateAt } = document
               res.status(200).json({ _id, name, users, updateAt })
             })
