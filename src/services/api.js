@@ -26,6 +26,19 @@ class api {
       })
     return response
   }
+
+  static async listConnection(token) {
+    const response = await http
+      .get('/connection', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .catch(err => {
+        throw err
+      })
+    return response
+  }
 }
 
 export default api

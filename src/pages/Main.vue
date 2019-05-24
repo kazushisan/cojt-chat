@@ -17,7 +17,7 @@
               ) {{ connection.messages.slice(-1)[0].content }}
             .tab__item
               UserListItem(
-                v-for="user in $data.users"
+                v-for="user in $store.state.UserStore.user.contacts"
                 :key="user._id"
                 :name="user.name"
                 :displayName="user.displayName"
