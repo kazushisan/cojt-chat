@@ -29,7 +29,9 @@ class ConnectionController {
       .exec((err, result) => {
         if (err) {
           res.status(503).json({ message: 'database error' })
-        } else if (!result) {
+        } else if (result._id) {
+          res.status(200).json(result)
+        } else {
           Connection.create({
             _id: new new mongoose.Types.ObjectId()(),
             users: [req.login._id, req.body._id],
@@ -50,8 +52,6 @@ class ConnectionController {
             .catch(() => {
               res.status(503).json({ message: 'database error' })
             })
-        } else {
-          res.status(200).json(result)
         }
       })
   }
