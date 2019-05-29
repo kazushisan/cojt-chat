@@ -17,7 +17,7 @@
               ) {{ connection.messages.slice(-1)[0].content }}
             .tab__item
               UserListItem(
-                v-for="user in $store.state.UserStore.user.contacts"
+                v-for="user in UserStore.user.contacts"
                 :key="user._id"
                 :name="user.name"
                 :displayName="user.displayName"
@@ -177,13 +177,21 @@ export default {
       input: ''
     }
   },
+  couputed: {
+    AuthStore() {
+      return this.$store.state.AuthStore
+    },
+    UserStore() {
+      return this.$store.state.UserStore
+    }
+  },
   mounted() {
     this.listConnection()
   },
   methods: {
     async listConnection() {
       const response = await api
-        .listConnection(this.$store.state.AuthStore.token)
+        .listConnection(this.AuthStore.token)
         .catch(err => {
           console.log(err)
         })
@@ -192,7 +200,7 @@ export default {
     },
     async clickContact(id) {
       const response = await api
-        .findOrCreateConnection(this.$store.state.AuthStore.token, id)
+        .findOrCreateConnection(this.AuthStore.token, id)
         .catch(err => {
           console.log(err)
         })
