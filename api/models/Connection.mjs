@@ -4,7 +4,8 @@ const connectionSchema = mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
     name: String,
-    users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    latestMessage: { type: mongoose.Schema.Types.ObjectId, ref: 'Message' }
   },
   {
     timestamps: true

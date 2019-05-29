@@ -51,11 +51,6 @@ export default {
         .then(response => {
           const { token } = response.data
           this.$store.commit('AuthStore/setToken', token)
-          return api.getUser(this.$store.state.AuthStore.token)
-        })
-        .then(response => {
-          this.$store.commit('UserStore/set', response.data)
-
           this.$router.push({ path: '/main' })
         })
         .catch(err => {
