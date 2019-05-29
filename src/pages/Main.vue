@@ -177,7 +177,7 @@ export default {
       input: ''
     }
   },
-  couputed: {
+  computed: {
     AuthStore() {
       return this.$store.state.AuthStore
     },
