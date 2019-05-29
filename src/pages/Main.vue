@@ -53,6 +53,7 @@
 <script>
 import { atoms, organisms, molecules } from '../components'
 import api from '../services/api'
+import socket from '../services/socket'
 
 const { ChatBubble, UserImage, PillSelector } = atoms
 const { Header } = organisms
@@ -189,6 +190,8 @@ export default {
     if (this.AuthStore.token) {
       this.getUser()
       this.listConnection()
+      socket.connect()
+      socket.authenticate(this.AuthStore.token)
     } else {
       this.$router.push({ path: '/' })
     }

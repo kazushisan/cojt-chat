@@ -1,13 +1,18 @@
+import http from 'http'
 import express from 'express'
 import compression from 'compression'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
+import socket from 'socket.io'
 
 import routes from './routes'
 
 export default () =>
   new Promise((resolve, reject) => {
     const app = express()
+    const server = http.createServer(app)
+    const io = socket(server)
+
     app.use(compression())
     app.use(
       bodyParser.urlencoded({
@@ -31,6 +36,7 @@ export default () =>
         'Access-Control-Allow-Methods',
         'GET, PUT, POST, DELETE, OPTIONS'
       )
+      res.header('Access-Control-Allow-Credentials', 'true')
       next()
     })
 
@@ -49,7 +55,7 @@ export default () =>
     })
 
     db.once('open', () => {
-      routes(app)
-      resolve(app)
+      routes(app, io)
+      resolve(server)
     })
   })
