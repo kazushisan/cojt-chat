@@ -6,5 +6,9 @@
 <script>
 require('./_base.scss')
 
-export default {}
+export default {
+  created() {
+    this.$store.commit('AuthStore/loadToken')
+  }
+}
 </script>

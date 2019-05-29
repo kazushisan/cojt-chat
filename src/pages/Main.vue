@@ -186,9 +186,20 @@ export default {
     }
   },
   mounted() {
-    this.listConnection()
+    if (this.AuthStore.token) {
+      this.getUser()
+      this.listConnection()
+    } else {
+      this.$router.push({ path: '/' })
+    }
   },
   methods: {
+    async getUser() {
+      const response = await api.getUser(this.AuthStore.token).catch(err => {
+        console.log(err)
+      })
+      this.$store.commit('UserStore/set', response.data)
+    },
     async listConnection() {
       const response = await api
         .listConnection(this.AuthStore.token)
@@ -205,7 +216,6 @@ export default {
           console.log(err)
         })
       console.log(response)
-      await this.listConnection()
     }
   }
 }
