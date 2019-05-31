@@ -30,6 +30,17 @@ class AuthMiddleware {
         res.status(status).json({ status, message })
       })
   }
+
+  authSocket(io, socket, token, callback) {
+    jwt
+      .verifyToken(token)
+      .then(decode => {
+        callback(decode._id)
+      })
+      .catch(() => {
+        io.to(socket.id).emit('error', { message: 'unauthorized request' })
+      })
+  }
 }
 
 const authMiddleware = new AuthMiddleware()

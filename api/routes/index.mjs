@@ -15,5 +15,10 @@ export default (app, io) => {
     console.log('a user connected')
 
     socket.on('join', token => socketController.join(io, socket, token))
+
+    socket.on('send', (token, data) =>
+      authMiddleware.authSocket(io, socket, token, id =>
+        socketController.send(io, socket, id, data)
+    )
   })
 }
