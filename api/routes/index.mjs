@@ -1,5 +1,6 @@
 import authController from '../controllers/AuthController'
 import userController from '../controllers/UserController'
+import socketController from '../controllers/SocketController' 
 import apiRoutes from './apiRoutes'
 
 export default (app, io) => {
@@ -10,8 +11,6 @@ export default (app, io) => {
   io.on('connection', socket => {
     console.log('a user connected')
 
-    socket.on('authenticate', token => {
-      console.log(token)
-    })
+    socket.on('join', token => socketController.join(io, socket, token))
   })
 }
