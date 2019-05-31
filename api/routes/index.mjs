@@ -19,6 +19,7 @@ export default (app, io) => {
     socket.on('send', (token, data) =>
       authMiddleware.authSocket(io, socket, token, id =>
         socketController.send(io, socket, id, data)
+      )
     )
   })
 }
