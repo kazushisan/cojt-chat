@@ -11,10 +11,10 @@
           .tab
             .tab__item(:style="{ marginLeft: $data.selectedTab * -100 + '%' }")
               MessageListItem(
-                v-for="connection in $data.connections"
+                v-for="connection in ConnectionStore.connections"
                 :key="connection._id",
-                :user="connection.users.filter(user => user._id !== $data.user._id).map(user => user.name).join(', ')"
-              ) {{ connection.messages.slice(-1)[0].content }}
+                :user="connection.users.filter(user => user._id !== $data.user._id).map(user => user.displayName).join(', ')"
+              ) {{ connection.latestMessage ? connection.latestMessage.content : '' }}
             .tab__item
               UserListItem(
                 v-for="user in UserStore.user.contacts"
@@ -184,6 +184,9 @@ export default {
     },
     UserStore() {
       return this.$store.state.UserStore
+    },
+    ConnectionStore() {
+      return this.$store.state.ConnectionStore
     }
   },
   mounted() {
@@ -209,8 +212,7 @@ export default {
         .catch(err => {
           console.log(err)
         })
-
-      console.log(response)
+      this.$store.commit('ConnectionStore/set', response.data)
     },
     async clickContact(id) {
       const response = await api

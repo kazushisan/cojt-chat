@@ -5,10 +5,6 @@ import connectionController from '../controllers/ConnectionController'
 
 const router = express.Router()
 
-// message
-router.get('/message', messageController.read)
-router.post('/message', messageController.create)
-
 // user
 router.get('/user', userController.get.bind(userController))
 router.put(
@@ -21,6 +17,11 @@ router.get('/connection', connectionController.list.bind(connectionController))
 router.get(
   '/connection/:id',
   connectionController.findOrCreate.bind(connectionController)
+)
+
+router.get(
+  '/connection/:id/message',
+  messageController.list.bind(messageController)
 )
 
 export default router
