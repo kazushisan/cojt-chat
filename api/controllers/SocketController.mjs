@@ -1,14 +1,13 @@
-import authController from './AuthController'
+import jwt from '../services/jwt'
 
 class SocketController {
   join(io, socket, token) {
-    authController
+    jwt
       .verifyToken(token)
       .then(decode => {
         socket.join(decode._id)
       })
       .catch(() => {
-        console.log(socket.id)
         io.to(socket.id).emit('error', { message: 'unauthorized request' })
       })
   }
