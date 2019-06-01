@@ -4,6 +4,8 @@ import socketController from '../controllers/SocketController'
 
 import authMiddleware from '../middlewares/AuthMiddleware'
 
+import generateSocketHandler from '../services/generateSocketHandler'
+
 import apiRoutes from './apiRoutes'
 
 export default (app, io) => {
@@ -14,12 +16,16 @@ export default (app, io) => {
   io.on('connection', socket => {
     console.log('a user connected')
 
-    socket.on('join', token => socketController.join(io, socket, token))
+    const join = generateSocketHandler(io, socket, [
+      socketController.join.bind(socketController)
+    ])
 
-    socket.on('send', (token, data) =>
-      authMiddleware.authSocket(io, socket, token, id =>
-        socketController.send(io, socket, id, data)
-      )
-    )
+    socket.on('join', join)
+
+    // socket.on('send', (token, data) =>
+    //   authMiddleware.authSocket(io, socket, token, id =>
+    //     socketController.send(io, socket, id, data)
+    //   )
+    // )
   })
 }

@@ -8,7 +8,7 @@ class Socket {
   }
 
   join(token) {
-    this.socket.emit('join', token)
+    this.socket.emit('join', { token })
   }
 
   onError(data) {

@@ -4,7 +4,8 @@ import Message from '../models/Message'
 import Connection from '../models/Connection'
 
 class SocketController {
-  join(io, socket, token) {
+  join(req) {
+    const { token, io, socket } = req
     jwt
       .verifyToken(token)
       .then(decode => {

@@ -194,7 +194,8 @@ export default {
       this.getUser()
       this.listConnection()
       socket.connect()
-      socket.join(this.AuthStore.token)
+      // socket.join(this.AuthStore.token)
+      socket.join('aaa')
     } else {
       this.$router.push({ path: '/' })
     }
