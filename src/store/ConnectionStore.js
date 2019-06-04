@@ -20,7 +20,7 @@ const ConnectionStore = {
 
   getters: {
     currentConnection(state) {
-      state.connections.find(item => item._id === state.current)
+      return state.connections.find(item => item._id === state.current)
     }
   },
 

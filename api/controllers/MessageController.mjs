@@ -7,11 +7,13 @@ class MessageController {
 
   list(req, res) {
     Message.find()
-      .where('from')
-      .all(req.login._id)
       .where('connection')
       .equals(req.params.id)
       .sort({ updateAt: -1 })
+      .populate({
+        path: 'from',
+        select: 'displayName _id name'
+      })
       .select('_id content connection from createdAt')
       .exec((err, result) => {
         if (err) {

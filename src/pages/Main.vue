@@ -86,7 +86,7 @@ export default {
       MessageStore: state => state.MessageStore
     }),
     currentConnection() {
-      return store.getters['ConnectionStore/CurrentConnection']
+      return store.getters['ConnectionStore/currentConnection']
     }
   },
   mounted() {
@@ -108,6 +108,7 @@ export default {
           connection: this.ConnectionStore.current
         }
       })
+      this.$data.input = ''
     },
     async clickContact(id) {
       const response = await api
@@ -157,6 +158,7 @@ export default {
 .message {
   flex: 1 0 0;
   padding: 20px;
+  overflow-y: scroll;
 
   &__item {
     display: flex;
