@@ -16,11 +16,13 @@ class SocketController {
       })
   }
 
-  send(io, socket, id, data) {
+  send(req) {
+    const { io, socket, id, data } = req
     const messageId = new mongoose.Typess.ObjectId()
 
     Message.create({
       _id: messageId,
+      from: id,
       content: data.content,
       connection: data.connection
     })
