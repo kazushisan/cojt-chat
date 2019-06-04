@@ -39,7 +39,8 @@ class AuthMiddleware {
         req.id = decode._id
         next()
       })
-      .catch(() => {
+      .catch(err => {
+        console.log(err)
         io.to(socket.id).emit('error', { message: 'unauthorized request' })
       })
   }

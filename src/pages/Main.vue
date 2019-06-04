@@ -46,6 +46,7 @@
                 ) {{ message.content }}
           MessageInput(
             v-model="$data.input"
+            @send="onSend"
             style="flex: 0 0 auto;"
           )
 </template>
@@ -101,7 +102,11 @@ export default {
   methods: {
     async onSend() {
       socket.send({
-        token: this.AuthStore.token
+        token: this.AuthStore.token,
+        data: {
+          content: this.$data.input,
+          connection: this.ConnectionStore.current
+        }
       })
     },
     async clickContact(id) {

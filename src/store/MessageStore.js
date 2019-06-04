@@ -10,7 +10,7 @@ const MessageStore = {
 
   mutations: {
     set(state, payload) {
-      state.message = payload.map(item => new Message(item))
+      state.messages = payload.map(item => new Message(item))
     },
     push(state, payload) {
       state.messages.push(new Message(payload))
@@ -24,6 +24,7 @@ const MessageStore = {
         .catch(err => {
           console.log(err)
         })
+      console.log(response)
       commit('set', response.data)
     }
   }

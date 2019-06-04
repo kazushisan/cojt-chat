@@ -18,7 +18,7 @@ class SocketController {
 
   send(req) {
     const { io, socket, id, data } = req
-    const messageId = new mongoose.Typess.ObjectId()
+    const messageId = new mongoose.Types.ObjectId()
 
     Message.create({
       _id: messageId,
@@ -26,7 +26,10 @@ class SocketController {
       content: data.content,
       connection: data.connection
     })
-      .then(() => this.findConnectionById(data.connection))
+      .then(document => {
+        data.createdAt = document.createdAt
+        return this.findConnectionById(document.connection)
+      })
       .then(document => {
         document.latestMessage = messageId
         return document.save()
@@ -42,9 +45,10 @@ class SocketController {
       .then(document => {
         document.users.forEach(user => {
           io.to(user).emit('new message', {
-            content: document.content,
-            connection: document.connection,
-            from: document.from
+            content: data.content,
+            connection: data.connection,
+            createdAt: data.createdAt,
+            from: id
           })
         })
       })
@@ -52,6 +56,7 @@ class SocketController {
         if (err.message === 'connection not found') {
           io.to(socket.id).emit('error', { message: err.message })
         } else {
+          console.log(err)
           io.to(socket.id).emit('error', { message: 'database error' })
         }
       })

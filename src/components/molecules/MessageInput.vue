@@ -63,6 +63,7 @@ export default {
   &__button {
     flex: 0 0 auto;
     margin: 16px;
+    background-color: transparent;
     background-image: url('../../assets/send.svg');
     background-size: cover;
     width: 28px;
