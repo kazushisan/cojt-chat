@@ -14,6 +14,7 @@
                 v-for="connection in ConnectionStore.connections"
                 :key="connection._id",
                 :user="connection.users.filter(user => user._id !== UserStore.user._id).map(user => user.displayName).join(', ')"
+                @click="clickConnection(connection._id)"
               ) {{ connection.latestMessage ? connection.latestMessage.content : '' }}
             .tab__item
               UserListItem(
@@ -24,27 +25,28 @@
                 @click="clickContact(user._id)"
               )
         .main__detail
-          .message
+          .message(ref="message")
             .message__item(
               v-for="message in MessageStore.messages"
               :key="message._id"
-              :class="{ 'message__item--me': message.from == UserStore.user._id }"
+              :class="{ 'message__item--me': message.from._id === UserStore.user._id }"
             )
               UserImage(
-                v-if="message.from !== UserStore.user._id"
+                v-if="message.from._id !== UserStore.user._id"
                 :width="32"
                 :style="{ marginRight: '8px' }"
               )
               div
                 div(
-                  v-if="message.from !== UserStore.user._id && currentConnection.users.length > 2"
+                  v-if="message.from._id !== UserStore.user._id && currentConnection.users.length > 2"
                   :style="{ fontSize: '12px', color: 'rgba(0, 0, 0, 0.3)' }"
-                ) {{ currentConnection.users.find(user => user._id == message.from).name }}
+                ) {{ currentConnection.users.find(user => user._id === message.from._id).name }}
                 ChatBubble(
-                  :fromMe="message.from == UserStore.user._id"
+                  :fromMe="message.from._id === UserStore.user._id"
                   :date="message.createdAt"
                 ) {{ message.content }}
           MessageInput(
+            v-if="currentConnection"
             v-model="$data.input"
             @send="onSend"
             style="flex: 0 0 auto;"
@@ -93,7 +95,7 @@ export default {
     if (this.AuthStore.token) {
       store.dispatch('UserStore/getUser')
       store.dispatch('ConnectionStore/listConnection')
-      socket.connect()
+      socket.connect(this.$refs.message)
       socket.join({ token: this.AuthStore.token })
     } else {
       this.$router.push({ path: '/' })
@@ -109,6 +111,11 @@ export default {
         }
       })
       this.$data.input = ''
+    },
+    async clickConnection(connectionId) {
+      store.commit('ConnectionStore/setCurrent', connectionId)
+      await store.dispatch('ConnectionStore/listConnection')
+      await store.dispatch('MessageStore/listMessage', connectionId)
     },
     async clickContact(id) {
       const response = await api
@@ -139,7 +146,7 @@ export default {
 
   &__side {
     flex: 0 0 auto;
-    width: 400px;
+    width: 360px;
     overflow-y: scroll;
   }
 

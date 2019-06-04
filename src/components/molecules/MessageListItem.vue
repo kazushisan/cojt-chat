@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div(@click="$emit('click')")
     .message-list-item
       UserImage(
         style="flex: 0 0 auto; height: 48px;"

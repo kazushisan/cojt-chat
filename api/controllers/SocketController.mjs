@@ -26,8 +26,17 @@ class SocketController {
       content: data.content,
       connection: data.connection
     })
+      .then(document =>
+        document
+          .populate({
+            path: 'from',
+            select: 'displayName _id name'
+          })
+          .execPopulate()
+      )
       .then(document => {
         data.createdAt = document.createdAt
+        data.from = document.from
         return this.findConnectionById(document.connection)
       })
       .then(document => {
@@ -48,7 +57,7 @@ class SocketController {
             content: data.content,
             connection: data.connection,
             createdAt: data.createdAt,
-            from: id
+            from: data.from
           })
         })
       })

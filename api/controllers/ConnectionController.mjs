@@ -5,10 +5,14 @@ class ConnectionController {
   list(req, res) {
     Connection.find({ users: { $all: req.login._id } })
       .sort({ updateAt: -1 })
-      .select('_id name users updateAt')
+      .select('_id name users updateAt latestMessage')
       .populate({
         path: 'users',
         select: 'displayName _id name'
+      })
+      .populate({
+        path: 'latestMessage',
+        select: '_id content connection from createdAt'
       })
       .exec((err, result) => {
         if (err) {

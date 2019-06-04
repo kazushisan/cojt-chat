@@ -7,7 +7,7 @@ class Connection {
     this.users = args.users
 
     if (args.latestMessage) {
-      this.latestMessage = new Message(args.message)
+      this.latestMessage = new Message(args.latestMessage)
     }
   }
 }
