@@ -4,9 +4,9 @@ class date {
 
     value = value.replace(/yyyy/, dateObject.getFullYear())
     value = value.replace(/MM/, date.fill(dateObject.getMonth() + 1, 2))
-    value = value.replace(/dd/, dateObject.getDate())
-    value = value.replace(/hh/, date.fill(dateObject.getHours() + 1, 2))
-    value = value.replace(/mm/, date.fill(dateObject.getMinutes() + 1, 2))
+    value = value.replace(/dd/, date.fill(dateObject.getDate(), 2))
+    value = value.replace(/hh/, date.fill(dateObject.getHours(), 2))
+    value = value.replace(/mm/, date.fill(dateObject.getMinutes(), 2))
 
     return value
   }

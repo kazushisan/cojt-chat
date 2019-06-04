@@ -4,8 +4,8 @@ import Connection from '../models/Connection'
 class ConnectionController {
   list(req, res) {
     Connection.find({ users: { $all: req.login._id } })
-      .sort({ updateAt: -1 })
-      .select('_id name users updateAt latestMessage')
+      .sort({ updatedAt: -1 })
+      .select('_id name users updatedAt latestMessage')
       .populate({
         path: 'users',
         select: 'displayName _id name'
