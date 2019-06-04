@@ -19,13 +19,12 @@ export default (app, io) => {
     const join = generateSocketHandler(io, socket, [
       socketController.join.bind(socketController)
     ])
+    const send = generateSocketHandler(io, socket, [
+      authMiddleware.authSocket.bind(authMiddleware),
+      socketController.send.bind(socketController)
+    ])
 
     socket.on('join', join)
-
-    // socket.on('send', (token, data) =>
-    //   authMiddleware.authSocket(io, socket, token, id =>
-    //     socketController.send(io, socket, id, data)
-    //   )
-    // )
+    socket.on('send', send)
   })
 }

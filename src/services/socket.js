@@ -7,7 +7,7 @@ class Socket {
     this.socket.on('error', data => this.onError(data))
   }
 
-  join(token) {
+  join({ token }) {
     this.socket.emit('join', { token })
   }
 

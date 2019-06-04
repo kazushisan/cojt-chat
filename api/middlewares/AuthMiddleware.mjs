@@ -31,11 +31,13 @@ class AuthMiddleware {
       })
   }
 
-  authSocket(io, socket, token, callback) {
+  authSocket(req, next) {
+    const { io, socket, token } = req
     jwt
       .verifyToken(token)
       .then(decode => {
-        callback(decode._id)
+        req.id = decode._id
+        next()
       })
       .catch(() => {
         io.to(socket.id).emit('error', { message: 'unauthorized request' })
