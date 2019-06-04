@@ -1,13 +1,7 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
 import App from './App.vue'
-
 import router from './router'
-import createStore from './store'
-
-Vue.use(Vuex)
-
-const store = createStore()
+import store from './store'
 
 const app = () =>
   new Vue({

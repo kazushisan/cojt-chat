@@ -41,7 +41,7 @@ class SocketController {
       )
       .then(document => {
         document.users.forEach(user => {
-          io.to(user).emmit('new message', {
+          io.to(user).emit('new message', {
             content: document.content,
             connection: document.connection,
             from: document.from

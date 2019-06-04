@@ -26,7 +26,7 @@
         .main__detail
           .message
             .message__item(
-              v-for="message in $data.connections[1].messages"
+              v-for="message in MessageStore.messages"
               :key="message._id"
               :class="{ 'message__item--me': message.from == UserStore.user._id }"
             )
@@ -37,9 +37,9 @@
               )
               div
                 div(
-                  v-if="message.from !== UserStore.user._id && $data.connections[1].users.length > 2"
+                  v-if="message.from !== UserStore.user._id && currentConnection.users.length > 2"
                   :style="{ fontSize: '12px', color: 'rgba(0, 0, 0, 0.3)' }"
-                ) {{ $data.connections[1].users.find(user => user._id == message.from).name }}
+                ) {{ currentConnection.users.find(user => user._id == message.from).name }}
                 ChatBubble(
                   :fromMe="message.from == UserStore.user._id"
                   :date="message.createdAt"
@@ -72,109 +72,6 @@ export default {
   data() {
     return {
       selectedTab: 0,
-      connections: [
-        {
-          _id: 'a',
-          name: 'グループ1',
-          users: [
-            {
-              _id: 'aa',
-              name: 'ユーザ名1'
-            },
-            {
-              _id: 'bb',
-              name: 'ユーザ名2'
-            }
-          ],
-          messages: [
-            {
-              _id: 'cc',
-              content: 'メッセージ',
-              from: 'aa',
-              createdAt: new Date()
-            },
-            {
-              _id: 'dd',
-              content: 'メッセージ',
-              from: 'bb',
-              createdAt: new Date()
-            },
-            {
-              _id: 'ee',
-              content: '返信1',
-              from: 'aa',
-              createdAt: new Date()
-            }
-          ]
-        },
-        {
-          _id: 'b',
-          name: 'グループ1',
-          users: [
-            {
-              _id: 'ff',
-              name: 'ユーザ名3'
-            },
-            {
-              _id: 'bb',
-              name: 'ユーザ名2'
-            },
-            {
-              _id: 'gg',
-              name: 'ユーザ名4'
-            }
-          ],
-          messages: [
-            {
-              _id: 'hh',
-              content: '適当なメッセージ',
-              from: 'ff',
-              createdAt: new Date()
-            },
-            {
-              _id: 'ii',
-              content: '適当なメッセージの返信',
-              from: 'bb',
-              createdAt: new Date()
-            },
-            {
-              _id: 'jj',
-              content: '適当なメッセージの返信その2',
-              from: 'ff',
-              createdAt: new Date()
-            },
-            {
-              _id: 'gg',
-              content:
-                '適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2適当なメッセージの返信その2',
-              from: 'ff',
-              createdAt: new Date()
-            }
-          ]
-        }
-      ],
-      user: {
-        _id: 'bb',
-        name: 'ユーザ名2'
-      },
-      users: [
-        {
-          _id: 'aa',
-          name: 'username1',
-          displayName: 'ユーザ名1'
-        },
-        {
-          _id: 'bb',
-          name: 'username2',
-          displayName: 'ユーザの名前'
-        },
-        {
-          _id: 'cc',
-          name: 'username3',
-          displayName: 'ユーザ3'
-        }
-      ],
-
       input: ''
     }
   },
@@ -190,6 +87,9 @@ export default {
     },
     MessageStore() {
       return this.$store.state.MessageStore
+    },
+    currentConnection() {
+      return this.$store.getters['ConnectionStore/CurrentConnection']
     }
   },
   mounted() {
@@ -203,6 +103,9 @@ export default {
     }
   },
   methods: {
+    async onSend() {
+      socket.send()
+    },
     async getUser() {
       const response = await api.getUser(this.AuthStore.token).catch(err => {
         console.log(err)
@@ -232,7 +135,7 @@ export default {
           console.log(err)
         })
       const connectionId = response.data._id
-
+      this.$store.commit('ConnectionStore/setCurrent', connectionId)
       await this.listConnection()
       await this.listMessage(connectionId)
     }
