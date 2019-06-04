@@ -8,9 +8,7 @@ const MessageStore = {
 
   mutations: {
     set(state, payload) {
-      payload.forEach(item => {
-        state.messages.push(new Message(item))
-      })
+      state.message = payload.map(item => new Message(item))
     },
     push(state, payload) {
       state.messages.push(new Message(payload))

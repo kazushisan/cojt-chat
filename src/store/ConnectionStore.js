@@ -8,9 +8,7 @@ const ConnectionStore = {
 
   mutations: {
     set(state, payload) {
-      payload.forEach(item => {
-        state.connections.push(new Connection(item))
-      })
+      state.connections = payload.map(item => new Connection(item))
     }
   }
 }

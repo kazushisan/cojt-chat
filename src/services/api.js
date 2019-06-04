@@ -40,6 +40,19 @@ class api {
     return response
   }
 
+  static async listMessage(token, id) {
+    const response = await http
+      .get(`/connection/${id}/message`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .catch(err => {
+        throw err
+      })
+    return response
+  }
+
   static async findOrCreateConnection(token, id) {
     const response = await http
       .get(`/connection/${id}`, {

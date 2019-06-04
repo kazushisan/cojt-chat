@@ -187,6 +187,9 @@ export default {
     },
     ConnectionStore() {
       return this.$store.state.ConnectionStore
+    },
+    MessageStore() {
+      return this.$store.state.MessageStore
     }
   },
   mounted() {
@@ -214,13 +217,24 @@ export default {
         })
       this.$store.commit('ConnectionStore/set', response.data)
     },
+    async listMessage(connectionId) {
+      const response = await api
+        .listMessage(this.AuthStore.token, connectionId)
+        .catch(err => {
+          console.log(err)
+        })
+      this.$store.commit('MessageStore/set', response.data)
+    },
     async clickContact(id) {
       const response = await api
         .findOrCreateConnection(this.AuthStore.token, id)
         .catch(err => {
           console.log(err)
         })
-      console.log(response.data)
+      const connectionId = response.data._id
+
+      await this.listConnection()
+      await this.listMessage(connectionId)
     }
   }
 }
