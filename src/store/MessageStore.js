@@ -1,4 +1,6 @@
 import Message from '../models/Message'
+import AuthStore from './AuthStore'
+import api from '../services/api'
 
 const MessageStore = {
   namespaced: true,
@@ -12,6 +14,17 @@ const MessageStore = {
     },
     push(state, payload) {
       state.messages.push(new Message(payload))
+    }
+  },
+
+  actions: {
+    async listMessage({ commit }, connectionId) {
+      const response = await api
+        .listMessage(AuthStore.state.token, connectionId)
+        .catch(err => {
+          console.log(err)
+        })
+      commit('set', response.data)
     }
   }
 }

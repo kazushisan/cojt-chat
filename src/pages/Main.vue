@@ -51,9 +51,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { atoms, organisms, molecules } from '../components'
 import api from '../services/api'
 import socket from '../services/socket'
+import store from '../store'
 
 const { ChatBubble, UserImage, PillSelector } = atoms
 const { Header } = organisms
@@ -76,26 +78,20 @@ export default {
     }
   },
   computed: {
-    AuthStore() {
-      return this.$store.state.AuthStore
-    },
-    UserStore() {
-      return this.$store.state.UserStore
-    },
-    ConnectionStore() {
-      return this.$store.state.ConnectionStore
-    },
-    MessageStore() {
-      return this.$store.state.MessageStore
-    },
+    ...mapState({
+      AuthStore: state => state.AuthStore,
+      UserStore: state => state.UserStore,
+      ConnectionStore: state => state.ConnectionStore,
+      MessageStore: state => state.MessageStore
+    }),
     currentConnection() {
-      return this.$store.getters['ConnectionStore/CurrentConnection']
+      return store.getters['ConnectionStore/CurrentConnection']
     }
   },
   mounted() {
     if (this.AuthStore.token) {
-      this.getUser()
-      this.listConnection()
+      store.dispatch('UserStore/getUser')
+      store.dispatch('ConnectionStore/listConnection')
       socket.connect()
       socket.join({ token: this.AuthStore.token })
     } else {
@@ -104,29 +100,9 @@ export default {
   },
   methods: {
     async onSend() {
-      socket.send()
-    },
-    async getUser() {
-      const response = await api.getUser(this.AuthStore.token).catch(err => {
-        console.log(err)
+      socket.send({
+        token: this.AuthStore.token
       })
-      this.$store.commit('UserStore/set', response.data)
-    },
-    async listConnection() {
-      const response = await api
-        .listConnection(this.AuthStore.token)
-        .catch(err => {
-          console.log(err)
-        })
-      this.$store.commit('ConnectionStore/set', response.data)
-    },
-    async listMessage(connectionId) {
-      const response = await api
-        .listMessage(this.AuthStore.token, connectionId)
-        .catch(err => {
-          console.log(err)
-        })
-      this.$store.commit('MessageStore/set', response.data)
     },
     async clickContact(id) {
       const response = await api
@@ -135,9 +111,9 @@ export default {
           console.log(err)
         })
       const connectionId = response.data._id
-      this.$store.commit('ConnectionStore/setCurrent', connectionId)
-      await this.listConnection()
-      await this.listMessage(connectionId)
+      store.commit('ConnectionStore/setCurrent', connectionId)
+      await store.dispatch('ConnectionStore/listConnection')
+      await store.dispatch('MessageStore/listMessage', connectionId)
     }
   }
 }
