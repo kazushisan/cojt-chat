@@ -13,7 +13,7 @@
               MessageListItem(
                 v-for="connection in ConnectionStore.connections"
                 :key="connection._id",
-                :user="connection.users.filter(user => user._id !== $data.user._id).map(user => user.displayName).join(', ')"
+                :user="connection.users.filter(user => user._id !== UserStore.user._id).map(user => user.displayName).join(', ')"
               ) {{ connection.latestMessage ? connection.latestMessage.content : '' }}
             .tab__item
               UserListItem(
@@ -28,20 +28,20 @@
             .message__item(
               v-for="message in $data.connections[1].messages"
               :key="message._id"
-              :class="{ 'message__item--me': message.from == $data.user._id }"
+              :class="{ 'message__item--me': message.from == UserStore.user._id }"
             )
               UserImage(
-                v-if="message.from !== $data.user._id"
+                v-if="message.from !== UserStore.user._id"
                 :width="32"
                 :style="{ marginRight: '8px' }"
               )
               div
                 div(
-                  v-if="message.from !== $data.user._id && $data.connections[1].users.length > 2"
+                  v-if="message.from !== UserStore.user._id && $data.connections[1].users.length > 2"
                   :style="{ fontSize: '12px', color: 'rgba(0, 0, 0, 0.3)' }"
                 ) {{ $data.connections[1].users.find(user => user._id == message.from).name }}
                 ChatBubble(
-                  :fromMe="message.from == $data.user._id"
+                  :fromMe="message.from == UserStore.user._id"
                   :date="message.createdAt"
                 ) {{ message.content }}
           MessageInput(
