@@ -25,6 +25,9 @@
                 @click="clickContact(user._id)"
               )
         .main__detail
+          .detail-header(
+            v-if="currentConnection"
+          ) {{ currentConnection.users.filter(user => user._id !== UserStore.user._id).map(user => user.displayName).join(', ') }}
           .message(ref="message")
             .message__item(
               v-for="message in MessageStore.messages"
@@ -190,5 +193,10 @@ export default {
     position: relative;
     transition: all 0.3s;
   }
+}
+
+.detail-header {
+  border-bottom: 1px #eee solid;
+  padding: 20px;
 }
 </style>
