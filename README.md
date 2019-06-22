@@ -2,6 +2,8 @@
 
 [筑波大学情報学群組み込み技術キャンパスOJT](http://www.cojt.or.jp/tkb/) ソフトウェアコースの課題（自由制作）のチャットアプリ
 
+![chat screen](https://user-images.githubusercontent.com/29304238/59516331-1662fe80-8efc-11e9-93c8-34eba2cdb724.png)
+
 ## Prereqisities
 
 - Docker
