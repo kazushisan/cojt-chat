@@ -29,7 +29,7 @@
     "@storybook/addon-viewport": "^5.0.10",
     "@storybook/vue": "^5.0.10",
     "autoprefixer": "^9.5.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel": "^6.23.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
