@@ -47,7 +47,7 @@
     "nodemon": "^1.19.0",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.17.0",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "sass-loader": "^7.1.0",
     "socket.io-client": "^2.2.0",
